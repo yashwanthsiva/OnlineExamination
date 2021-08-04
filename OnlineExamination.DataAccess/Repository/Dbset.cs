@@ -19,5 +19,15 @@ namespace OnlineExamination.DataAccess.Repository
         {
             throw new NotImplementedException();
         }
+
+        internal void Attach<T>(T entityToDelete) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Remove<T>(T entityToDelete) where T : class
+        {
+            throw new NotImplementedException();
+        }
     }
 }

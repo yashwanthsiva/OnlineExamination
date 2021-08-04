@@ -12,6 +12,7 @@ namespace OnlineExamination.DataAccess.Repository
     public class GenericRepository<T> : IDisposable, IGenericRepository<T> where T : class
     {
         internal Dbset<T> dbSet;
+        private T entityToDelete;
         private readonly ApplicationDbContext _context = null;
 
         public GenericRepository(Dbset<T> dbSet, ApplicationDbContext context)
@@ -33,22 +34,46 @@ namespace OnlineExamination.DataAccess.Repository
 
         public void Delete(T entityToDelete)
         {
-            throw new NotImplementedException();
+            if (_context.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                dbSet.Attach(entityToDelete);
+
+            }
+            dbSet.Remove(entityToDelete);
         }
 
-        public Task<T> DeleteAsync(T entityToDelete)
+        public async Task<T> DeleteAsync(T entityToDelete)
         {
-            throw new NotImplementedException();
+            if (_context.Entry(entityToDelete).State==EntityState.Detached)
+            {
+                dbSet.Attach(entityToDelete);
+            }
+            dbSet.Remove(entityToDelete);
+            return entityToDelete;
         }
 
         public void DeleteByID(object id)
         {
-            throw new NotImplementedException();
+            entityToDelete = dbSet.Find(id);
+            Delete(entityToDelete);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this.disposed = true;
         }
 
         public IEnumerable<T> GetAll(
@@ -87,12 +112,15 @@ namespace OnlineExamination.DataAccess.Repository
 
         public void Update(T entityToUpdate)
         {
-            throw new NotImplementedException();
+            dbSet.Attach(entityToUpdate);
+            _context.Entry(entityToUpdate).State = EntityState.Modified;
         }
 
-        public Task<T> UpdateAsync(T entityToUpdate)
+        public async Task<T> UpdateAsync(T entityToUpdate)
         {
-            throw new NotImplementedException();
+            dbSet.Attach(entityToUpdate);
+            _context.Entry(entityToUpdate).State = EntityState.Modified;
+            return entityToUpdate;
         }
     }
 }
