@@ -61,6 +61,7 @@ namespace OnlineExamination.DataAccess.Data
         
                 entity.HasOne(d => d.Exams).WithMany(p => p.ExamResults).HasForeignKey(d => d.ExamsID);
                 entity.HasOne(d => d.Questions).WithMany(p => p.ExamResults).HasForeignKey(d => d.QuestionsId);
+                entity.HasOne(d => d.Students).WithMany(p => p.ExamResults).HasForeignKey(d => d.StudentsId).OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             base.OnModelCreating(modelbuilder);
