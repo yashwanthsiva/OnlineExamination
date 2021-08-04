@@ -11,14 +11,14 @@ namespace OnlineExamination.DataAccess.Repository
 {
     public class GenericRepository<T> : IDisposable, IGenericRepository<T> where T : class
     {
-        internal Dbset<T> dbSet;
-        private T entityToDelete;
+        internal DbSet<T> dbSet;
         private readonly ApplicationDbContext _context = null;
 
-        public GenericRepository(Dbset<T> dbSet, ApplicationDbContext context)
+        public GenericRepository(ApplicationDbContext context)
         {
-            this.dbSet = dbSet;
-            _context = context;
+            
+            _context = context; 
+            this.dbSet = _context.Set<T>();
         }
 
         public void Add(T entity)
@@ -54,7 +54,7 @@ namespace OnlineExamination.DataAccess.Repository
 
         public void DeleteByID(object id)
         {
-            entityToDelete = dbSet.Find(id);
+            T entityToDelete = dbSet.Find(id);
             Delete(entityToDelete);
         }
 
