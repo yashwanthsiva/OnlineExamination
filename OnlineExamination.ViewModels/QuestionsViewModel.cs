@@ -8,6 +8,12 @@ namespace OnlineExamination.ViewModels
 {
     public class QuestionsViewModel
     {
+
+        public QuestionsViewModel()
+        {
+
+        }
+
         public int Id { get; set; }
         [Required]
         [Display(Name = "Exam")]
@@ -34,11 +40,10 @@ namespace OnlineExamination.ViewModels
         public IEnumerable<Exams> ExamList { get; set; }
         public int TotalCount { get; set; }
         public int SelectedAnswer { get; set; }
-        public Questions QuestionsId { get; set; }
-        public QuestionsViewModel()
-        {
 
-        }
+
+        public Questions QuestionsId { get; set; }
+       
         public QuestionsViewModel(Questions model)
         {
             Id = model.Id;
