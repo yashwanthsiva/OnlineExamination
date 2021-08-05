@@ -35,7 +35,10 @@ namespace OnlineExamination.ViewModels
         public int TotalCount { get; set; }
         public int SelectedAnswer { get; set; }
         public Questions QuestionsId { get; set; }
+        public QuestionsViewModel()
+        {
 
+        }
         public QuestionsViewModel(Questions model)
         {
             Id = model.Id;
