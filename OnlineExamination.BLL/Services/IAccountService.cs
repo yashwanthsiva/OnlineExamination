@@ -9,6 +9,6 @@ namespace OnlineExamination.BLL.Services
     {
         LoginViewModel Login(LoginViewModel vm);
         bool AddTeacher(UserViewModel vm);
-        PagedResult<UserViewModel>GetAllTeachers()
+        PagedResult<UserViewModel> GetAllTeachers();
     }
 }
