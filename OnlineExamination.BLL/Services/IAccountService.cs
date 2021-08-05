@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineExamination.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,8 @@ namespace OnlineExamination.BLL.Services
 {
     public interface IAccountService
     {
-        Login
+        LoginViewModel Login(LoginViewModel vm);
+        bool AddTeacher(UserViewModel vm);
+        PagedResult<UserViewModel>GetAllTeachers()
     }
 }
