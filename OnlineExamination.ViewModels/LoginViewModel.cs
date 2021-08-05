@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
-namespace OnlineExamination.DataAccess
+namespace OnlineExamination.ViewModels
 {
-    public class Users
+    public class LoginViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Username { get; set; }
+        [Required]
+        public string UserName { get; set; }
+        [Required]
         public string Password { get; set; }
         public string Role { get; set; }
-        public ICollection<Groups> Groups { get; set; } = new HashSet<Groups>();
     }
 }

@@ -12,7 +12,7 @@ namespace OnlineExamination.DataAccess
         public string Password { get; set; }
         public string Contact { get; set; }
         
-        public int GroupsId { get; set; }
+        public int? GroupsId { get; set; }
         public Groups Groups { get; set; }
         public ICollection<ExamResults> ExamResults { get; set; } = new HashSet<ExamResults>();
 
