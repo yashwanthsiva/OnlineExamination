@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using OnlineExamination.DataAccess.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
+
 using System.Threading.Tasks;
 
 namespace OnlineExamination.DataAccess.Repository
@@ -19,6 +20,7 @@ namespace OnlineExamination.DataAccess.Repository
             
             _context = context; 
             this.dbSet = _context.Set<T>();
+           
         }
 
         public void Add(T entity)
@@ -29,7 +31,8 @@ namespace OnlineExamination.DataAccess.Repository
         public async Task<T> AddAsync(T entity)
         {
             dbSet.Add(entity);
-            return entity;
+            //await dbSet.SaveChanges();
+            return await dbSet.FindAsync(entity);
         }
 
         public void Delete(T entityToDelete)
@@ -47,9 +50,10 @@ namespace OnlineExamination.DataAccess.Repository
             if (_context.Entry(entityToDelete).State==EntityState.Detached)
             {
                 dbSet.Attach(entityToDelete);
+                
             }
             dbSet.Remove(entityToDelete);
-            return entityToDelete;
+            return await dbSet.FindAsync(entityToDelete);
         }
 
         public void DeleteByID(object id)
@@ -120,7 +124,8 @@ namespace OnlineExamination.DataAccess.Repository
         {
             dbSet.Attach(entityToUpdate);
             _context.Entry(entityToUpdate).State = EntityState.Modified;
-            return entityToUpdate;
+            //await _context.SaveChangesAsync()
+            return await dbSet.FindAsync(entityToUpdate);
         }
     }
 }

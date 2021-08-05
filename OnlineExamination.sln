@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineExamination.DataAccess", "OnlineExamination.DataAccess\OnlineExamination.DataAccess.csproj", "{101744AB-E31E-4C29-BDA0-569267D3E190}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineExamination.DataAccess", "OnlineExamination.DataAccess\OnlineExamination.DataAccess.csproj", "{101744AB-E31E-4C29-BDA0-569267D3E190}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineExamination.ViewModels", "OnlineExamination.ViewModels\OnlineExamination.ViewModels.csproj", "{FD66DA00-A91C-4F11-9D23-DF3888E43E53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineExamination.BLL", "OnlineExamination.BLL\OnlineExamination.BLL.csproj", "{FAE2EE0F-0BDA-4F3E-9ECC-51B27D281C82}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineExamination.Web", "OnlineExamination.Web\OnlineExamination.Web.csproj", "{CDCB8A8F-BB49-4392-BA01-A71FB5FE393E}"
 EndProject
@@ -17,8 +21,7 @@ Global
 		{101744AB-E31E-4C29-BDA0-569267D3E190}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{101744AB-E31E-4C29-BDA0-569267D3E190}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{101744AB-E31E-4C29-BDA0-569267D3E190}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< Updated upstream
-=======
+
 		{FD66DA00-A91C-4F11-9D23-DF3888E43E53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD66DA00-A91C-4F11-9D23-DF3888E43E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD66DA00-A91C-4F11-9D23-DF3888E43E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,11 +30,13 @@ Global
 		{FAE2EE0F-0BDA-4F3E-9ECC-51B27D281C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAE2EE0F-0BDA-4F3E-9ECC-51B27D281C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAE2EE0F-0BDA-4F3E-9ECC-51B27D281C82}.Release|Any CPU.Build.0 = Release|Any CPU
+
 		{CDCB8A8F-BB49-4392-BA01-A71FB5FE393E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CDCB8A8F-BB49-4392-BA01-A71FB5FE393E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDCB8A8F-BB49-4392-BA01-A71FB5FE393E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDCB8A8F-BB49-4392-BA01-A71FB5FE393E}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> Stashed changes
+
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -68,9 +68,6 @@ namespace OnlineExamination.DataAccess.Data
 
         }
 
-        internal object Entry(object entryToUpdate)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
