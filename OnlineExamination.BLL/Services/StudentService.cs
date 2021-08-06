@@ -1,4 +1,5 @@
-﻿using OnlineExamination.DataAccess;
+﻿using Microsoft.Extensions.Logging;
+using OnlineExamination.DataAccess;
 using OnlineExamination.DataAccess.UnitOfWork;
 using OnlineExamination.ViewModels;
 using System;
@@ -12,20 +13,70 @@ namespace OnlineExamination.BLL.Services
     public class StudentService:IStudentService
     {
         IUnitOfWork _unitOfWork;
+        ILogger<QuestionsService> _iLogger;
 
-        public Task<StudentViewModel> AddAsync(StudentViewModel vm)
+        public async Task<StudentViewModel> AddAsync(StudentViewModel vm)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Students obj = vm.ConvertViewModel(vm);
+                await _unitOfWork.GenericRepository<Students>().AddAsync(obj);
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+            return vm;
         }
 
         public PagedResult<StudentViewModel> GetAll(int pageNumber, int pageSize)
         {
-            throw new NotImplementedException();
+            var model = new StudentViewModel();
+            try
+            {
+                int ExcludeRecords = (pageSize * pageNumber) - pageSize;
+                List<StudentViewModel> detailList = new List<StudentViewModel>();
+                var modelList = _unitOfWork.GenericRepository<Students>().GetAll()
+                    .Skip(ExcludeRecords).Take(pageSize).ToList();
+                var totalCount = _unitOfWork.GenericRepository<Students>().GetAll().ToList();
+                detailList = GroupListInfo(modelList);
+                if(detailList!=null)
+                {
+                    model.StudentList = detailList;
+                    model.TotalCount = totalCount.Count();
+                }
+            }
+            catch(Exception ex)
+            {
+                _iLogger.LogError(ex.Message);
+            }
+            var result = new PagedResult<StudentViewModel>
+            { 
+                Data= model.StudentList,
+                TotalItems=model.TotalCount,
+                PageNumber=pageNumber,
+                PageSize=pageSize
+            };
+            return result;
+        }
+
+        private List<StudentViewModel> GroupListInfo(List<Students> modelList)
+        {
+            return modelList.Select(o => new StudentViewModel(o)).ToList();
         }
 
         public IEnumerable<Students> GetAllStudents()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var students = _unitOfWork.GenericRepository<Students>().GetAll();
+                return students;
+            }
+            catch(Exception ex)
+            {
+                _iLogger.LogError(ex.Message);
+            }
+            return Enumerable.Empty<Students>();
         }
 
         public IEnumerable<ResultViewModel> GetExamResults(int studentId)
@@ -40,7 +91,7 @@ namespace OnlineExamination.BLL.Services
 
                 var requiredData = examResults.Join(students, er => er.StudentsId, s => s.Id,
                     (er, st) => new { er, st }).Join(exams, erj => erj.er.ExamsID, ex => ex.Id,
-                    (erj, ex) => new { erj, ex }).Join(questions, exj => exj.erj.er.QuestionsID, q => q.Id,
+                    (erj, ex) => new { erj, ex }).Join(questions, exj => exj.erj.er.QuestionsId, q => q.Id,
                     (exj, q) => new ResultViewModel()
                     {
                         StudentId = studentId,
@@ -48,7 +99,7 @@ namespace OnlineExamination.BLL.Services
                         TotalQuestion =examResults.Count(a=>a.StudentsId==studentId
                          && a.ExamsId==exj.ex.Id), CorrectAnswer = examResults.Count(a=>a.StudentsId==studentId &&
                          a.ExamsId==exj.ex.Id && a.Answer==q.Answer),
-                        WrongAnswer = examResults.Count(a=>StudentsId==studentId &&
+                        WrongAnswer = examResults.Count(a=>a.StudentsId==studentId &&
                         a.ExamsId == exj.ex.Id && a.Answer !=q.Answer)
                     });
                 return requiredData;
@@ -115,9 +166,36 @@ namespace OnlineExamination.BLL.Services
             return false;
         }
 
-        public Task<StudentViewModel> UpdateAsync(StudentViewModel vm)
+        public async Task<StudentViewModel> UpdateAsync(StudentViewModel vm)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Students obj = _unitOfWork.GenericRepository<Students>().GetByID(vm.Id);
+                obj.Name = vm.Name;
+                obj.Username = vm.UserName;
+                obj.Contact = vm.Contact;
+                await _unitOfWork.GenericRepository<Students>().UpdateAsync(obj);
+                _unitOfWork.Save();
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            return vm;
+        }
+
+        public StudentViewModel GetStudentDetails(int studentId)
+        {
+            try
+            {
+                var student = _unitOfWork.GenericRepository<Students>().GetByID(studentId);
+                return student != null ? new StudentViewModel(student) : null;
+            }
+            catch(Exception ex)
+            {
+                _iLogger.LogError(ex.Message);
+            }
+            return null;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace OnlineExamination.BLL.Services
 {
     public interface IGroupService
     {
-        PagedResult<GroupViewModel> GetAllGroups(int pagenumber, int pagesize);
+        PagedResult<GroupViewModel> GetAllGroups(int pageNumber, int pageSize);
         Task<GroupViewModel> AddGroupAsync(GroupViewModel groupVM);
         IEnumerable<Groups> GetAllGroups();
         GroupViewModel GetById(int groupId);

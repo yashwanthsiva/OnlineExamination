@@ -11,6 +11,7 @@ namespace OnlineExamination.DataAccess
         public Students Students { get; set; }
         public int? ExamsID { get; set; }
         public int ExamsId { get; set; }
+        public string Title { get; set; }
         public Exams Exams { get; set; }
         public int QuestionsId { get; set; }
         public Questions Questions { get; set; }
