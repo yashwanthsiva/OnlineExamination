@@ -97,12 +97,14 @@ namespace OnlineExamination.Web.Controllers
             if (sessionObj != null)
             {
                 var model = _studentService.GetStudentDetails(Convert.ToInt32(sessionObj.Id));
-                if (model.PictureFileName !=null)
-                {
-                    model.PictureFileName = ConfigurationManager.GetFilePath() + model.PictureFileName;
-
-                }
+                return View(model);
             }
+            return RedirectToAction("Login", "Account");
+        }
+        public IActionResult Profile([FromForm]StudentViewModel studentViewModel)
+        {
+            _studentService.UpdateAsync(studentViewModel);
+            return RedirectToAction("Profile");
         }
     }
 }
