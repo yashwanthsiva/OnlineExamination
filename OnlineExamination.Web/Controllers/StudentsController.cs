@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Protocols;
 using OnlineExamination.BLL.Services;
 using OnlineExamination.ViewModels;
 using System;
@@ -68,6 +69,40 @@ namespace OnlineExamination.Web.Controllers
                 return View(model);
             }
             return RedirectToAction("Login", "Account");
+        }
+        [HttpPost]
+        public IActionResult AttendExam(AttendExamViewModel attendExamViewModel)
+        {
+            bool result = _studentService.SetExamResult(attendExamViewModel);
+            return RedirectToAction("AttendExam");
+        }
+        public IActionResult Result(String studentsId)
+        {
+            var model = _studentService.GetExamResults(Convert.ToInt32(studentsId));
+            return View(model);
+        }
+        public IActionResult ViewResult()
+        {
+            LoginViewModel sessionObj = HttpContext.Session.Get<LoginViewModel>("loginvm");
+            if (sessionObj != null)
+            {
+                var model = _studentService.GetExamResults(Convert.ToInt32(sessionObj.Id));
+                return View(model);
+            }
+            return RedirectToAction("Login", "Account");
+        }
+        public IActionResult Profile()
+        {
+            LoginViewModel sessionObj = HttpContext.Session.Get<LoginViewModel>("loginvm");
+            if (sessionObj != null)
+            {
+                var model = _studentService.GetStudentDetails(Convert.ToInt32(sessionObj.Id));
+                if (model.PictureFileName !=null)
+                {
+                    model.PictureFileName = ConfigurationManager.GetFilePath() + model.PictureFileName;
+
+                }
+            }
         }
     }
 }
