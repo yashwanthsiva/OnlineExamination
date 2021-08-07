@@ -62,7 +62,7 @@ namespace OnlineExamination.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=users}/{action=Index}/{id?}");
             });
         }
     }
