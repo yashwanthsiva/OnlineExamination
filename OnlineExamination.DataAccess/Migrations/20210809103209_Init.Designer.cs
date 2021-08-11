@@ -10,7 +10,7 @@ using OnlineExamination.DataAccess.Data;
 namespace OnlineExamination.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210806081301_Init")]
+    [Migration("20210809103209_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,10 +31,7 @@ namespace OnlineExamination.DataAccess.Migrations
                     b.Property<int>("Answer")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ExamsID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExamsId")
+                    b.Property<int?>("ExamsId")
                         .HasColumnType("int");
 
                     b.Property<int>("QuestionsId")
@@ -48,7 +45,7 @@ namespace OnlineExamination.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExamsID");
+                    b.HasIndex("ExamsId");
 
                     b.HasIndex("QuestionsId");
 
@@ -233,7 +230,7 @@ namespace OnlineExamination.DataAccess.Migrations
                 {
                     b.HasOne("OnlineExamination.DataAccess.Exams", "Exams")
                         .WithMany("ExamResults")
-                        .HasForeignKey("ExamsID");
+                        .HasForeignKey("ExamsId");
 
                     b.HasOne("OnlineExamination.DataAccess.Questions", "Questions")
                         .WithMany("ExamResults")

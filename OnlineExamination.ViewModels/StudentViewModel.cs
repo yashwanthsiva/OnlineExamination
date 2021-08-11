@@ -27,7 +27,6 @@ namespace OnlineExamination.ViewModels
         public int? GroupsId { get; set; }
         public int TotalCount { get; set; }
         public List<StudentViewModel> StudentList { get; set; }
-        public int PictureFileName { get; set; }
 
         public StudentViewModel(Students model)
         {

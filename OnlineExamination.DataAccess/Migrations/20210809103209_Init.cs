@@ -122,8 +122,7 @@ namespace OnlineExamination.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StudentsId = table.Column<int>(type: "int", nullable: false),
-                    ExamsID = table.Column<int>(type: "int", nullable: true),
-                    ExamsId = table.Column<int>(type: "int", nullable: false),
+                    ExamsId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     QuestionsId = table.Column<int>(type: "int", nullable: false),
                     Answer = table.Column<int>(type: "int", nullable: false)
@@ -132,8 +131,8 @@ namespace OnlineExamination.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_ExamResults", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExamResults_Exams_ExamsID",
-                        column: x => x.ExamsID,
+                        name: "FK_ExamResults_Exams_ExamsId",
+                        column: x => x.ExamsId,
                         principalTable: "Exams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -152,9 +151,9 @@ namespace OnlineExamination.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExamResults_ExamsID",
+                name: "IX_ExamResults_ExamsId",
                 table: "ExamResults",
-                column: "ExamsID");
+                column: "ExamsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExamResults_QuestionsId",

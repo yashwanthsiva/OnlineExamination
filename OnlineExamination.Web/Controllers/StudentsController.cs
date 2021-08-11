@@ -23,9 +23,9 @@ namespace OnlineExamination.Web.Controllers
             _questionsService = questionsService;
         }
 
-        public IActionResult Index(int pageNumber=1,int pageSize=10)
+        public IActionResult Index(/*int pageNumber=1,int pageSize=10*/)
         {
-            return View(_studentService.GetAll(pageNumber,pageSize));
+            return View(_studentService.GetAllStudents());/*(pageNumber,pageSize));*/
         }
         public IActionResult Create()
         {
@@ -91,6 +91,7 @@ namespace OnlineExamination.Web.Controllers
             }
             return RedirectToAction("Login", "Account");
         }
+        
         public IActionResult Profile()
         {
             LoginViewModel sessionObj = HttpContext.Session.Get<LoginViewModel>("loginvm");
@@ -101,6 +102,7 @@ namespace OnlineExamination.Web.Controllers
             }
             return RedirectToAction("Login", "Account");
         }
+        [HttpPost]
         public IActionResult Profile([FromForm]StudentViewModel studentViewModel)
         {
             _studentService.UpdateAsync(studentViewModel);

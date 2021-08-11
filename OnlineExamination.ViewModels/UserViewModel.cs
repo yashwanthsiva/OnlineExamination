@@ -22,14 +22,16 @@ namespace OnlineExamination.ViewModels
         public Users ConvertViewModel(UserViewModel vm)
         {
             return new Users
-            { Id = vm.Id,
-            Name = vm.Name ?? "",
-            Username = vm.UserName,
-            Password = vm.Password,
-            Role = vm.Role,
-        };
-
+            {
+                Id = vm.Id,
+                Name = vm.Name ?? "",
+                Username = vm.UserName,
+                Password = vm.Password,
+                Role = vm.Role
+            };
         }
+
+        
         public int Id { get; set; }
         [Required]
         [Display(Name ="Name")]

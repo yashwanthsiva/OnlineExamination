@@ -92,7 +92,7 @@ namespace OnlineExamination.BLL.Services
             try
             {
                 var questionsRecord = _unitOfWork.GenericRepository<ExamResults>().GetAll()
-                    .FirstOrDefault(x => x.ExamsID == examId && x.StudentsId == studentId);
+                    .FirstOrDefault(x => x.ExamsId == examId && x.StudentsId == studentId);
                 return questionsRecord == null ? false : true;
             }
             catch (Exception ex)
