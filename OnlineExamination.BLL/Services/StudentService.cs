@@ -90,7 +90,7 @@ namespace OnlineExamination.BLL.Services
                 var questions = _unitOfWork.GenericRepository<Questions>().GetAll();
 
                 var requiredData = examResults.Join(students, er => er.StudentsId, s => s.Id,
-                    (er, st) => new { er, st }).Join(exams, erj => erj.er.ExamsID, ex => ex.Id,
+                    (er, st) => new { er, st }).Join(exams, erj => erj.er.ExamsId, ex => ex.Id,
                     (erj, ex) => new { erj, ex }).Join(questions, exj => exj.erj.er.QuestionsId, q => q.Id,
                     (exj, q) => new ResultViewModel()
                     {
@@ -122,7 +122,7 @@ namespace OnlineExamination.BLL.Services
                     ExamResults examResults = new ExamResults();
                     examResults.StudentsId = vm.StudentId;
                     examResults.Questions = item.QuestionsId;
-                    examResults.ExamsID = item.ExamsId;
+                    examResults.ExamsId = item.ExamsId;
                     examResults.Answer = item.SelectedAnswer;
                     _unitOfWork.GenericRepository<ExamResults>().AddAsync(examResults);
                 }
@@ -189,7 +189,7 @@ namespace OnlineExamination.BLL.Services
             try
             {
                 var student = _unitOfWork.GenericRepository<Students>().GetByID(studentId);
-                return student != null ? new StudentViewModel(student) : null;
+                return student != null ? new StudentViewModel(student) :  null;
             }
             catch(Exception ex)
             {

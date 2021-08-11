@@ -23,13 +23,15 @@ namespace OnlineExamination.Web.Controllers
         {
             return View(_examService.GetAll(pageNumber,pageSize));
         }
+        //[HttpGet]
         public IActionResult Create()
         {
             var model = new ExamViewModel();
             model.GroupList = _groupService.GetAllGroups();
             return View(model);
         }
-        public async Task<IActionResult> Creatr(ExamViewModel examViewModel)
+        [HttpPost]
+        public async Task<IActionResult> Create(ExamViewModel examViewModel)
         {
             if(ModelState.IsValid)
             {

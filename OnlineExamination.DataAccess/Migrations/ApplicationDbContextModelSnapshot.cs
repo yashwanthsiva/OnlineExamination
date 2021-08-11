@@ -29,10 +29,7 @@ namespace OnlineExamination.DataAccess.Migrations
                     b.Property<int>("Answer")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ExamsID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExamsId")
+                    b.Property<int?>("ExamsId")
                         .HasColumnType("int");
 
                     b.Property<int>("QuestionsId")
@@ -46,7 +43,7 @@ namespace OnlineExamination.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExamsID");
+                    b.HasIndex("ExamsId");
 
                     b.HasIndex("QuestionsId");
 
@@ -231,7 +228,7 @@ namespace OnlineExamination.DataAccess.Migrations
                 {
                     b.HasOne("OnlineExamination.DataAccess.Exams", "Exams")
                         .WithMany("ExamResults")
-                        .HasForeignKey("ExamsID");
+                        .HasForeignKey("ExamsId");
 
                     b.HasOne("OnlineExamination.DataAccess.Questions", "Questions")
                         .WithMany("ExamResults")
