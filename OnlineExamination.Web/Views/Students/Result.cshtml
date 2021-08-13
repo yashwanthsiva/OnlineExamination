@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Result";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
 
 <h1>Result</h1>
@@ -21,8 +22,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var item in Model)
-            {
+                @foreach (var item in Model)
+                {
                 <tr>
                     <td>@item.ExamName</td>
                     <td>@item.TotalQuestion</td>

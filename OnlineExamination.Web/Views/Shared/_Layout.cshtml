@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body style="background-image:url(Image/quiz.jpg); background-repeat:no-repeat">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
                 <a class="navbar-brand" asp-area="" asp-controller="Groups" asp-action="Index">Groups</a>
                 <a class="navbar-brand" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
-                <a class="navbar-brand" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,6 +23,7 @@
             </div>
         </nav>
     </header>
+    @*<img src="C:\Users\Yashwanth\source\repos\yashwanthsiva\OnlineExamination\OnlineExamination.Web\Image\quiz.jpg" />*@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
