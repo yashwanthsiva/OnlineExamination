@@ -8,7 +8,7 @@
 
 <h3>Students</h3>
 
-<form asp-action="Details" asp-controller="Groups" method="post">
+<form asp-action="Details" asp-controller="Groups" method="get">
     <input type="hidden" asp-for="Id"/>
     <ul>
         @for(var i=0;i < Model.StudentCheckList.Count();i++)

@@ -15,6 +15,12 @@ namespace OnlineExamination.BLL.Services
         IUnitOfWork _unitOfWork;
         ILogger<QuestionsService> _iLogger;
 
+        public StudentService(IUnitOfWork unitOfWork, ILogger<QuestionsService> iLogger)
+        {
+            _unitOfWork = unitOfWork;
+            _iLogger = iLogger;
+        }
+
         public async Task<StudentViewModel> AddAsync(StudentViewModel vm)
         {
             try
@@ -46,7 +52,7 @@ namespace OnlineExamination.BLL.Services
                     model.TotalCount = totalCount.Count();
                 }
             }
-            catch(Exception ex)
+            catch(NullReferenceException ex)
             {
                 _iLogger.LogError(ex.Message);
             }
@@ -191,7 +197,7 @@ namespace OnlineExamination.BLL.Services
                 var student = _unitOfWork.GenericRepository<Students>().GetByID(studentId);
                 return student != null ? new StudentViewModel(student) :  null;
             }
-            catch(Exception ex)
+            catch(NullReferenceException ex)
             {
                 _iLogger.LogError(ex.Message);
             }

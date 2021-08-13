@@ -23,9 +23,11 @@ namespace OnlineExamination.Web.Controllers
             _questionsService = questionsService;
         }
 
-        public IActionResult Index(/*int pageNumber=1,int pageSize=10*/)
+        public IActionResult Index(int pageNumber = 1, int pageSize = 10)
         {
-            return View(_studentService.GetAllStudents());/*(pageNumber,pageSize));*/
+            //return View(_studentService.GetAll(pageNumber,pageSize));
+            var q = _studentService.GetAll(pageNumber, pageSize);
+            return View(q);
         }
         public IActionResult Create()
         {
@@ -37,7 +39,7 @@ namespace OnlineExamination.Web.Controllers
             if (ModelState.IsValid)
             {
                 await _studentService.AddAsync(studentViewModel);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             return View(studentViewModel);
         }
@@ -64,7 +66,7 @@ namespace OnlineExamination.Web.Controllers
                         model.Message = "";
                     }
                     else
-                        model.Message = "You have already attend this exam";
+                        model.Message = "You have already attended this exam";
                 }
                 return View(model);
             }
@@ -74,7 +76,7 @@ namespace OnlineExamination.Web.Controllers
         public IActionResult AttendExam(AttendExamViewModel attendExamViewModel)
         {
             bool result = _studentService.SetExamResult(attendExamViewModel);
-            return RedirectToAction("AttendExam");
+            return RedirectToAction("Result");
         }
         public IActionResult Result(String studentsId)
         {
